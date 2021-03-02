@@ -122,10 +122,19 @@ pipeline{
                     last_started=env.STAGE_NAME
                 }
                 sshagent(['73480030-7719-475d-8bb3-d7a4fc22c524']){
-                    sh 'scp -r /var/jenkins_home/workspace/SpringPetDeploy/artifacts/*.jar ubuntu@3.18.221.13:/home/ubuntu/artifacts'
+                    sh 'scp -r /var/jenkins_home/workspace/SpringPetDeploy/artifacts/*.jar ubuntu@3.15.28.202:/home/ubuntu/artifacts'
         }
             }
         } 
+        
+        stage(){
+            steps{
+                script{
+                    last_started=env.STAGE_NAME
+                }
+                ssh ubuntu@3.15.28.202 java -jar spring-petclinic-2.3.1.BUILD-SNAPSHOT.jar
+            }
+        }
 
     }
         post{
